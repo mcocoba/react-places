@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { BrowserRouter as ReactRouter, Route } from 'react-router-dom';
+import { BrowserRouter as ReactRouter, Route, Switch } from 'react-router-dom';
 
 import App from './App';
 import Home from './pages/Home';
@@ -8,7 +8,7 @@ import Login from './pages/Login';
 import SignUp from './pages/Signup';
 import Dashboard from './pages/Dashboard';
 
-const userSignedIn = true;
+const userSignedIn = false;
 
 export default class Router extends React.Component {
     
@@ -30,10 +30,12 @@ export default class Router extends React.Component {
         return(
             <ReactRouter>
                 <App>
-                    <Route exact path="/" component={ this.home() } />
-                    <Route path="/login" component={Login} />
-                    <Route path="/signup" component={Login} />
-                    { this.signedInRoutes() }
+                    <Switch>
+                        <Route exact path="/" component={ this.home() } />
+                        <Route path="/login" component={Login} />
+                        <Route path="/signup" component={Login} />
+                        { this.signedInRoutes() }
+                    </Switch>
                 </App>
             </ReactRouter>
         )

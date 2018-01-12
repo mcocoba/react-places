@@ -1,7 +1,8 @@
 import React from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
-import TransitionGroup from 'react-transition-group/TransitionGroup'
+import TransitionGroup from 'react-transition-group/TransitionGroup';
 import { Card, CardText, CardMedia, CardTitle } from 'material-ui/Card';
+import { Link } from 'react-router-dom';
 
 import { indigo400, redA400, lightBlueA400, amberA400 } from 'material-ui/styles/colors';
 
@@ -45,7 +46,9 @@ export default class Home extends React.Component {
           <Container>
             <div className="Header-name">
               <Title />
-              <RaisedButton label="Crear cuenta gratuita" secondary={true} />
+              <Link to="/signup">
+                <RaisedButton label="Crear cuenta gratuita" secondary={true} />
+              </Link>
               <img className="Header-image" src={process.env.PUBLIC_URL + '/images/top-background.jpg'} />
             </div>
             <div>
