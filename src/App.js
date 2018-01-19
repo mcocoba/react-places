@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import { withRouter } from 'react-router-dom';
 
 import PlacesAppBar from './components/navigation/AppBar';
 import './App.css';
@@ -26,4 +27,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withRouter(App);

@@ -11,13 +11,13 @@ export default class PlaceHorizontal extends React.Component {
                     <div className="placeH-avatar">
                         <img src={ this.props.place.avatarImage } style={{ 'width':'50%' }}/>
                     </div>
-                    <div className="col-xs">
+                    <div className="col-xs" style={{ 'textAlign':'left' }}>
                         <CardHeader
                             title={ this.props.place.title }
                             subtitle={ this.props.place.address }
                         />
                         <div className="row middle-xs">
-                            <div className="col-xs-6 col-sm-8 col-lg-9" >
+                            <div className="col-xs-6 col-sm-8 col-lg-9">
                                 <CardText>{ this.props.place.description }</CardText>
                             </div>
                             <div className="col-xs">
