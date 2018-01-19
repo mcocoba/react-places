@@ -9,6 +9,7 @@ export default class PlacesAppBar extends React.Component{
             <AppBar 
                 title="Places"
                 style={{ 'backgroundColor': indigo600 }}
+                onClick={ this.props.goHome }
                 showMenuIconButton={false}
             />
         )
