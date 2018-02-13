@@ -126,7 +126,6 @@
   background-position: center;
 }
 
-<<<<<<< HEAD
 .Place-cover{
   height: 350px;
   background-size: cover;
@@ -139,16 +138,3 @@
 }
 
 .Place-container{}
-=======
-.PlaceH-avatar{
-  background-color: #f5f5f5;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width:25%;
-}
-
-.PlaceH-avatar img {
-  max-width: 80%;
-}
->>>>>>> 29dc71f799ee89e79551738369102668f6bba195

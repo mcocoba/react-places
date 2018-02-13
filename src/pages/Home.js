@@ -3,6 +3,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import TransitionGroup from 'react-transition-group/TransitionGroup';
 import { Card, CardText, CardMedia, CardTitle } from 'material-ui/Card';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import { indigo400, redA400, lightBlueA400, amberA400 } from 'material-ui/styles/colors';
 
@@ -11,18 +12,26 @@ import Title from '../components/Title';
 import Benefits from '../components/Benefits';
 import PlaceCard from '../components/places/PlaceCard';
 
-import data from '../requests/places';
+import { getPlaces } from '../requests/places';
 
-export default class Home extends React.Component {
+const places = [];
+
+class Home extends React.Component {
 
   constructor(props){
     super(props);
 
     this.state = {
-      places: data.places
+      places: places
     }
 
     this.hidePlace = this.hidePlace.bind(this);
+  }
+
+  loadPlaces(){
+    getPlaces().then(jsonResponse => {
+      const places = jsonResponse.docs;
+    });
   }
 
   places() {
@@ -66,5 +75,12 @@ export default class Home extends React.Component {
       </section>
     )
   }
-
 }
+
+function mapStateToProps(state, ownProps){
+  return {
+    places: state.places
+  }
+}
+
+export default connect(mapStateToProps)(Home)

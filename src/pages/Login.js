@@ -1,5 +1,10 @@
 import React from 'react';
 import { BrowserRouter as ReactRouter, Route, Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { login, signUp } from '../requests/auth';
+import { push } from 'react-router-redux';
+
+import * as actions from '../actions/userActions';
 
 import Container from '../components/Container';
 import Title from '../components/Title';
@@ -7,7 +12,36 @@ import Title from '../components/Title';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 
-export default class Login extends React.Component{
+export class Login extends React.Component{
+
+    constructor(props){
+        super(props);
+
+        this.requestAuth = this.requestAuth.bind(this);
+        this.createAccount = this.createAccount.bind(this);
+    }
+
+    requestAuth(){
+        const credentials = {
+            email: this.refs.emailField.getValue(),
+            password: this.refs.passwordField.getValue()
+        }
+
+        login(credentials).then( data => {
+            this.props.dispatch(actions.login(data.jwt));
+            this.props.dispatch(push('/'));
+        } ).catch(console.log);
+    }
+
+    createAccount(){
+        const credentials = {
+            email: this.refs.emailField.getValue(),
+            password: this.refs.passwordField.getValue()
+        }
+
+        signUp(credentials).then(console.log).catch(console.log);
+    }
+    
     render(){
         return(
             <div className="row middle-xs">
@@ -19,18 +53,20 @@ export default class Login extends React.Component{
                                 floatingLabelText="Correo Electronico"
                                 type="email"
                                 className="textfield"
+                                ref="emailField"
                             />
                             <TextField
                                 floatingLabelText="Password"
                                 type="password"
                                 className="textfield"
+                                ref="passwordField"
                             />
                             <div className="Login-action">
                                 <Route path="/login" exact render={()=>{
                                     return(
                                         <div>
                                             <Link to="/signup" style={{ marginRight: "1em" }}>Crear nueva cuenta </Link>
-                                            <RaisedButton label="Ingresar" secondary={true} />
+                                            <RaisedButton onClick={ this.requestAuth } label="Ingresar" secondary={true} />
                                         </div>
                                     )
                                 }}></Route>
@@ -38,7 +74,7 @@ export default class Login extends React.Component{
                                     return (
                                         <div>
                                             <Link to="/login" style={{ marginRight: "1em" }}>Ya tengo cuenta </Link>
-                                            <RaisedButton label="Crear cuenta" secondary={true} />
+                                            <RaisedButton onClick={ this.createAccount } label="Crear cuenta" secondary={true} />
                                         </div>
                                     )
                                 }}></Route>
@@ -53,3 +89,11 @@ export default class Login extends React.Component{
         )
     }
 }
+
+function mapStateToProps(state, ownProps){
+    return {
+        user: state.user
+    }
+}
+
+export default connect(mapStateToProps)(Login)
